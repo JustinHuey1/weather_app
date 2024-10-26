@@ -7,7 +7,7 @@ export default function Context() {
             <div className="flex justify-center">
                 <TodayDate />
             </div>
-            <div className="flex justify-center">
+            <div>
                 <City />
             </div>
         </div>
