@@ -1,7 +1,13 @@
 import React from 'react'
 
+import Header from './header'
+import Context from './context'
+
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <Header />
+      <Context />
+    </div>
   )
 }
