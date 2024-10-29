@@ -10,12 +10,14 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import React, { useState } from 'react';
 import Weather from "./weather";
 
+type ChangeCurrWeather = (date: string, temp: number, unit: string) => void;
+
 export default function City({
     tempType,
     changeCurrWeather
 }: {
     tempType: string,
-    changeCurrWeather: any
+    changeCurrWeather: ChangeCurrWeather
 }) {
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
