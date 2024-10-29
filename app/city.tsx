@@ -11,15 +11,17 @@ import React, { useState } from 'react';
 import Weather from "./weather";
 
 export default function City({
-    tempType
+    tempType,
+    changeCurrWeather
 }: {
-    tempType: string
+    tempType: string,
+    changeCurrWeather: any
 }) {
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
     const [cityData, setCityData] = useState();
     const [originalTempType, setOriginalTempType] = useState(tempType)
-
+    
     async function retrieveData(latitude: number, longitude: number) {
         let temp;
         try {
@@ -28,11 +30,12 @@ export default function City({
             } else {
                 temp = ''
             }
-            const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=rain,weather_code&daily=temperature_2m_max,temperature_2m_min${temp}`);
+            const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min${temp}&timezone=auto`);
 
             const data = await response.json();
             
             setCityData(data); 
+            changeCurrWeather(data.timezone, data.current.temperature_2m, data.daily_units.temperature_2m_max)
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -66,6 +69,7 @@ export default function City({
                             setstateid(e.id);
                         }}
                         placeHolder="Select State"
+                        disabled={!countryid}
                     />
                     </div>
                 <div>
@@ -77,11 +81,12 @@ export default function City({
                             retrieveData(e.latitude, e.longitude)
                         }}
                         placeHolder="Select City"
+                        disabled={!countryid || !stateid}
                     />
                 </div>
             </div>
             <div>
-                {cityData && <Weather tempType={tempType} data={cityData}/>}
+                {cityData && <Weather data={cityData}/>}
             </div>
         </div>
     )

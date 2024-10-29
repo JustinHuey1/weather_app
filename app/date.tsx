@@ -2,21 +2,28 @@
 
 import React, { useState, useEffect } from 'react';
 
-export default function TodayDate() {
-    const today = new Date();
-    const [curDate, setCurDate] = useState(today);
-
+export default function TodayDate({
+  timeZone
+ }: {
+  timeZone: string
+ } ) {
+    const [curTime, setCurTime] = useState(new Date());
     useEffect(() => {
+      if (timeZone) {
         const intervalId = setInterval(() => {
-          setCurDate(new Date());
+          setCurTime(new Date());
         }, 1000);
-    
+  
         return () => clearInterval(intervalId);
-      }, []);
+      }
+    }, [timeZone]);
 
     return (
         <div>
-            <h1>Today's date: {curDate.toDateString()}</h1>
+            {timeZone && curTime && 
+            <div>
+              <h1>Current time: {curTime.toLocaleString('en-US', {timeZone: timeZone})}</h1>
+            </div>}
         </div>
     )
 }

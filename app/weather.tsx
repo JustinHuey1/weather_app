@@ -2,14 +2,14 @@ import WeatherCard from "./ui/card"
 
 export default function Weather({
     data, 
-    tempType
 }: {
     data: any,
-    tempType: string
 }) {
-    const minTemperature = data.daily.temperature_2m_min
-    const maxTemperature = data.daily.temperature_2m_max
+    const minTemperature = data.daily.temperature_2m_min;
+    const maxTemperature = data.daily.temperature_2m_max;
     const days = data.daily.time;
+    const weatherCode = data.weather_code
+    const tempType = data.daily_units.temperature_2m_max;
     
     return (
         <div className="flex flex-row justify-between">
