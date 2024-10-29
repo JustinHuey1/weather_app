@@ -9,7 +9,7 @@ export default function TodayDate() {
     useEffect(() => {
         const intervalId = setInterval(() => {
           setCurDate(new Date());
-        }, 1000000);
+        }, 1000);
     
         return () => clearInterval(intervalId);
       }, []);

@@ -1,11 +1,12 @@
 export default function WeatherCard({
-    day, minTemp, maxTemp
+    day, minTemp, maxTemp, tempType
 }: {
     day: string,
     minTemp: number,
-    maxTemp: number
+    maxTemp: number,
+    tempType: string
 }) {
-
+    
     return (
         <div className="border-4 border-solid rounded-full">
             <div className="flex justify-start flex-col h-lvh items-center">
@@ -13,10 +14,10 @@ export default function WeatherCard({
                     {day}
                 </div>
                 <div className="">
-                    Min: {minTemp}
+                    Min: {minTemp} °{tempType=="fahrenheit" ? 'F' : 'C'}
                 </div>
                 <div className="">
-                    Max: {maxTemp}
+                    Max: {maxTemp} °{tempType=="fahrenheit" ? 'F' : 'C'}
                 </div>
             </div>
         </div>   
