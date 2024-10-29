@@ -8,7 +8,7 @@ export default function Weather({
     const minTemperature = data.daily.temperature_2m_min;
     const maxTemperature = data.daily.temperature_2m_max;
     const days = data.daily.time;
-    const weatherCode = data.weather_code
+    const weatherCode = data.daily.weather_code
     const tempType = data.daily_units.temperature_2m_max;
     
     return (
@@ -21,6 +21,7 @@ export default function Weather({
                             minTemp={minTemperature[index]} 
                             maxTemp={maxTemperature[index]}
                             tempType={tempType}
+                            weatherCode={weatherCode[index]}
                         />
                     </div>
                 )
